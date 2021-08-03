@@ -33,17 +33,17 @@ jobs:
         run: west update
       - name: West Zephyr export
         run: west zephyr-export
-      - name: West Build (NIBBLE)
-        run: west build -s zmk/app -b nice_nano_v2 -- -DSHIELD=nibble -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
-      - name: NIBBLE DTS File
+      - name: West Build (MF68)
+        run: west build -s zmk/app -b nice_nano_v2 -- -DSHIELD=mf68 -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+      - name: MF68 DTS File
         if: ${{ always() }}
         run: cat -n build/zephyr/nice_nano_v2.dts.pre.tmp
-      - name: NIBBLE Kconfig file
+      - name: MF68 Kconfig file
         run: cat build/zephyr/.config | grep -v "^#" | grep -v "^$"
       - name: Rename zmk.uf2
-        run: cp build/zephyr/zmk.uf2 nibble_nice_nano_v2.uf2
-      - name: Archive (NIBBLE)
+        run: cp build/zephyr/zmk.uf2 mf68_nice_nano_v2.uf2
+      - name: Archive (MF68)
         uses: actions/upload-artifact@v2
         with:
           name: firmware
-          path: nibble_nice_nano_v2.uf2
+          path: mf68_nice_nano_v2.uf2
