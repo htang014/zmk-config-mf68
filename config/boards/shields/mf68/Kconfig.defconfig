@@ -1,0 +1,6 @@
+if SHIELD_MF68
+
+config ZMK_KEYBOARD_NAME
+    default "Magicforce 68"
+
+endif
